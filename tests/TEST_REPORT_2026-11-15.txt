@@ -1,0 +1,24 @@
+SG Miles Companion MVP V0.2 — JS Engine Audit
+Rule version: DEMO_FIXTURES_2026_11_14_V1+KRIS_ATOME_GUARDS_2026_11_15
+RESULT: 21/21 PASS
+PASS 01 未知 MCC 不触发类别 4 mpd
+PASS 02 默认 S$480 + 券，模拟卡 B 540 miles / S$30 现金省
+PASS 03 已核实 8043：A 仅剩 S$300 高倍额度→1350 miles
+PASS 04 8042 不能冒充 8043 加成
+PASS 05 in-store POS 不得触发 Online 卡 C 4 mpd
+PASS 06 额度耗尽时 A 全部按基础倍率
+PASS 07 App QR 无 POS 券，不得叠加卡 A POS 奖励
+PASS 08 未确认优惠为零；两张券永不叠加
+PASS 09 Kris+ Google Pay + Citi 不给 4 mpd
+PASS 10 Kris+ Apple Pay + Citi 不给 4 mpd
+PASS 11 NFC 与 Kris+ in-app 不可混淆
+PASS 12 amaze 路径标条件性而非保证高倍
+PASS 13 Atome PPV 直接绑卡不给保证 4 mpd
+PASS 14 Atome PPV Apple Pay 记录冲突，需人工核实
+PASS 15 Atome Visa Signature SGD 不算 Contactless 4 mpd
+PASS 16 Atome Visa Signature FCY 需另查门槛
+PASS 17 Atome Citi Rewards Mastercard 为条件性候选
+PASS 18 Atome HSBC Revolution 为条件性候选
+PASS 19 Atome Google Pay 不可直接套用
+PASS 20 Atome Lady’s Solitaire Travel 不可套 MCC 5999
+PASS 21 Kris+ UOB VS SGD in-app 不算 Contactless

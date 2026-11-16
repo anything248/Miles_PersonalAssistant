@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#123c43">
+  <title>SG Miles Companion | Offline Payment Advisor MVP</title>
+  <style>
+    :root{--ink:#122a31;--muted:#5d7376;--sea:#0a716d;--sea-dark:#075a57;--sea-soft:#eaf6f3;--amber:#985b15;--amber-bg:#fff5e4;--red:#9c3d32;--red-bg:#fff0ee;--border:#dce7e5;--canvas:#f5f8f7;--card:#fff;--shadow:0 5px 26px rgba(19,56,60,.055)}
+    *{box-sizing:border-box}html{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC",sans-serif;color:var(--ink);background:var(--canvas)}body{margin:0;line-height:1.52}button,input,select{font:inherit}button{cursor:pointer}a{color:var(--sea-dark)}.wrap{max-width:1160px;margin:auto;padding:24px 22px 60px}
+    .top{background:#123c43;color:#fff}.topinner{max-width:1160px;margin:auto;padding:27px 22px 30px}.brand{display:flex;justify-content:space-between;gap:12px;align-items:center}.eyebrow{font-weight:800;letter-spacing:.17em;font-size:11px;text-transform:uppercase;color:#a4e7d7}.logo{font-size:26px;letter-spacing:-.035em;font-weight:800;margin:4px 0}.mutedwhite{color:#c9dcd9;font-size:13px;margin:5px 0 0}.pill{display:inline-flex;align-items:center;gap:5px;border-radius:100px;padding:5px 10px;font-size:11px;font-weight:800;background:#d9f2e9;color:#075b55;white-space:nowrap}.pill.dark{background:#34575b;color:#e2f7ed}.pill.warn{background:var(--amber-bg);color:var(--amber)}.pill.gray{background:#eef2f1;color:#4a676a}.pill.red{background:var(--red-bg);color:var(--red)}
+    h1,h2,h3,p{margin-top:0}h1{font-size:23px;letter-spacing:-.03em;margin-bottom:8px}h2{font-size:18px;letter-spacing:-.03em;margin-bottom:6px}h3{font-size:15px;margin-bottom:4px}.sectiondesc{font-size:13px;color:var(--muted);margin-bottom:17px}.layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:20px;align-items:start}.panel{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:21px;box-shadow:var(--shadow)}.panel+.panel{margin-top:17px}.formrow{margin-top:14px}label{font-size:12px;font-weight:750;display:block;margin-bottom:6px;color:#315159}input,select{width:100%;padding:11px 12px;background:#fff;border:1px solid #cbdcda;border-radius:9px;color:var(--ink)}input:focus,select:focus{outline:2px solid #7bcab7;outline-offset:1px}.hint{color:var(--muted);font-size:11px;margin-top:5px}.checkline{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:#304e51;padding:10px 12px;background:#f4f8f7;border:1px solid var(--border);border-radius:10px;cursor:pointer}.checkline input{width:17px;height:17px;flex:0 0 auto;margin-top:2px;accent-color:var(--sea)}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{border:0;border-radius:10px;padding:10px 14px;font-size:12px;font-weight:800;background:var(--sea);color:white}.btn:hover{background:var(--sea-dark)}.btn.secondary{background:#e9f2ef;color:var(--sea-dark)}.btn.secondary:hover{background:#dbece8}.buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}.tiny{font-size:11px;color:var(--muted)}.hero{border:1px solid #b7dcd4;background:linear-gradient(140deg,#e8f7f0,#f7fcfa 64%);border-radius:16px;padding:21px;margin-bottom:17px}.herohead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.hero h2{font-size:21px;margin:11px 0 6px}.biggrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}.metric{background:#fff;border:1px solid #deebe7;border-radius:11px;padding:12px}.metric .k{font-size:11px;color:var(--muted)}.metric .v{font-size:23px;font-weight:800;font-variant-numeric:tabular-nums;margin-top:1px}.metric .s{font-size:11px;color:var(--muted)}.notice{background:var(--amber-bg);border-left:3px solid #d79c38;padding:11px 13px;font-size:12px;border-radius:5px;margin-top:14px}.notice.red{background:var(--red-bg);border-color:#c4796b}.cardoption{border:1px solid var(--border);padding:14px 16px;border-radius:12px;margin-top:11px;display:flex;justify-content:space-between;gap:12px;align-items:start}.cardoption.top1{border-color:#9dcfc4;background:#f4fbf8}.cright{text-align:right;min-width:120px}.amount{font-size:18px;font-weight:850;font-variant-numeric:tabular-nums}.sub{font-size:11px;color:var(--muted)}.leftdetail{font-size:12px;color:#47676c;margin:4px 0}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:590px;font-size:12px}th,td{padding:10px 9px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}th{background:#f4f8f7;font-size:11px;color:#526f72;font-weight:800}td.num,th.num{text-align:right;white-space:nowrap}code{font-size:11px;color:#235963;background:#edf5f4;border-radius:4px;padding:2px 4px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px}.tab{background:#f1f5f4;color:#365b5e;border:1px solid var(--border);padding:7px 11px;border-radius:9px;font-size:12px;font-weight:750}.tab.active{background:var(--sea);border-color:var(--sea);color:#fff}.split{display:grid;grid-template-columns:1fr 1fr;gap:13px}.fact{border-radius:11px;padding:13px;border:1px solid var(--border)}.fact h3{display:flex;align-items:center;gap:6px}.fact p{font-size:12px;color:var(--muted);margin:5px 0 0}.fact.fail{background:#fff9f6}.fact.unknown{background:#fafaf5}.sep{height:1px;background:var(--border);margin:17px 0}.rule{font-size:12px;color:#315156;padding:7px 0;border-bottom:1px dashed var(--border)}.rule:last-child{border:0}.rule strong{color:#163b40}.audit{background:#102c31;color:#e5f4f0;padding:14px;border-radius:10px;overflow:auto;white-space:pre-wrap;word-break:break-word;font-size:11px;line-height:1.62;max-height:400px}.footer{font-size:11px;color:#697f80;margin-top:18px}.selftests{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;background:#f4f8f7;padding:10px 13px;border-radius:9px;white-space:pre-wrap;margin-top:9px;display:none}details{margin-top:10px}summary{cursor:pointer;color:var(--sea-dark);font-weight:750;font-size:12px}.sources{font-size:12px;color:var(--muted)}
+    @media(max-width:860px){.layout{grid-template-columns:1fr}.wrap{padding:16px 13px 45px}.topinner{padding:22px 15px}.panel{padding:17px}.biggrid{gap:8px}.metric{padding:10px}.metric .v{font-size:20px}}@media(max-width:540px){.logo{font-size:22px}.biggrid{grid-template-columns:1fr 1fr}.metric:last-child{grid-column:span 2}.split{grid-template-columns:1fr}.two{grid-template-columns:1fr}.cardoption{flex-direction:column}.cright{text-align:left}.brand{align-items:start}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="topinner">
+    <div class="brand"><div><div class="eyebrow">Personal Payment Decision Engine · V0.2</div><div class="logo">SG Miles Companion</div><p class="mutedwhite">消费前判断：哪张卡？哪个支付渠道？有什么不能叠加？</p></div><span class="pill dark">◉ Offline · Demo</span></div>
+  </div></header>
+  <main class="wrap">
+    <div class="layout">
+      <aside>
+        <section class="panel">
+          <h2>01 / 消费情景</h2><p class="sectiondesc">已预设眼镜店 S$480，实体店 POS 刷卡。</p>
+          <div class="formrow"><label for="merchant">商家名称</label><input id="merchant" value="Demo Optical SG（虚构）" autocomplete="off"><div class="hint">商家为演示虚构；不是实时 MCC 查询。</div></div>
+          <div class="two"><div class="formrow"><label for="amount">消费金额 · SGD</label><input id="amount" type="number" min="1" max="100000" step="0.01" value="480"></div><div class="formrow"><label for="date">交易日期</label><input id="date" type="date" value="2026-11-14"></div></div>
+          <div class="formrow"><label for="channel">支付渠道</label><select id="channel"><option value="pos">in-store · POS 实体刷卡</option><option value="appqr">in-store · App 扫码（模拟）</option><option value="online">online · 网页付款（模拟）</option></select><div class="hint">in-store 是消费场景，POS 与 App QR 的积分规则仍不同。</div></div>
+          <div class="formrow"><label for="mcc">MCC 确认状态</label><select id="mcc"><option value="unknown">未知（默认：不计任何 MCC 类别加成）</option><option value="8043">8043 · 眼镜及光学用品（假设已核实）</option><option value="8042">8042 · 视光师/眼科（假设已核实）</option><option value="5999">5999 · 其他零售（假设已核实）</option></select><div class="hint">8043 是正式 MCC 分类，但并不证明这家具体商户使用它。</div></div>
+          <div class="formrow"><label for="usedA">模拟卡 A：本奖励周期已用额度 (S$)</label><input id="usedA" type="number" min="0" max="500" step="0.01" value="200"><div class="hint" id="cycle-note">账单周期截止日：每月 18 日。奖励上限 S$500。</div></div>
+          <div class="formrow"><label class="checkline"><input type="checkbox" id="voucher" checked><span><strong>假设此店有可用 S$30 眼镜券</strong><br>模拟消费满 S$400，抵扣 S$30。不是现实中的已核实优惠。</span></label></div>
+          <div class="formrow"><label class="checkline"><input type="checkbox" id="mallVoucher"><span><strong>假设另有可用的模拟商场券 5%（封顶 S$15）</strong><br>默认关闭，必须主动确认；不能与 S$30 眼镜券叠加。</span></label></div>
+          <div class="formrow"><label for="mileValue">里程估值（SGD / mile）</label><select id="mileValue"><option value="0.01">1.0 cent / mile</option><option value="0.015" selected>1.5 cents / mile（仅情景假设）</option><option value="0.02">2.0 cents / mile</option></select></div>
+          <div class="buttons"><button class="btn" id="refresh">重新计算</button><button class="btn secondary" id="reset">恢复 S$480 示例</button></div>
+          <div id="formerror" class="notice red" style="display:none" role="alert"></div>
+        </section>
+        <section class="panel">
+          <h2>02 / 使用规则</h2>
+          <div class="rule"><strong>真实 MCC：</strong>未知不能自动当作 8043。</div>
+          <div class="rule"><strong>现金节省：</strong>先扣已假设可用的优惠，再按实际应付金额计算奖励。</div>
+          <div class="rule"><strong>额度：</strong>仅在模拟高倍奖励类别和当前周期内扣除。</div>
+          <div class="rule"><strong>奖励：</strong>直接卡付和 App QR 必须分别评估，不擅自把两个渠道的高倍奖励相加。</div>
+          <div class="rule"><strong>估算：</strong>模拟为整笔交易计算并向下取整，真实银行可能逐笔舍入/分段计点。</div>
+        </section>
+      </aside>
+      <section>
+        <section class="panel" style="margin-bottom:17px;border-color:#eac5bd" id="krisGuardPanel">
+          <div class="herohead"><h2 style="margin:0">🔔 Kris+ 付款前警示</h2><span class="pill red">REAL BANK RULE · 独立检查</span></div>
+          <p class="sectiondesc">这是实际 Citi Rewards 规则检查器；与下方眼镜店的虚构积分排名<strong>完全独立</strong>。选择 Kris+、信用卡和支付方式后立即判断。</p>
+          <div class="two"><div class="formrow"><label for="guardApp">准备使用的 App</label><select id="guardApp"><option value="krisplus" selected>Kris+（在 App 内付款）</option><option value="none">不用 Kris+ / 普通付款</option><option value="krisflyer">KrisFlyer（里程账户，非 Kris+ 付款）</option></select></div>
+          <div class="formrow"><label for="guardCard">付款卡片/路径</label><select id="guardCard"><option value="citi" selected>Citi Rewards Mastercard</option><option value="hsbc">HSBC Revolution</option><option value="ppv">UOB Preferred Visa (原 PPV)</option><option value="vs">UOB Visa Signature</option><option value="amaze">amaze → Citi Rewards Mastercard</option></select></div></div>
+          <div class="formrow"><label for="guardMethod">实际交易方式</label><select id="guardMethod"><option value="inapp_google" selected>Kris+ 内 Google Pay</option><option value="inapp_apple">Kris+ 内 Apple Pay</option><option value="nfc">实体店手机 NFC（非 Kris+ App 内付款）</option><option value="direct">网页直接输入卡号（非 Kris+）</option></select></div>
+          <div id="krisGuardAlert" class="notice red" role="alert" aria-live="assertive"></div>
+          <div class="hint">不会自动侦测你打开 Kris+、进入某商场或定位到某商家：这是离线网页，需在付款前打开并选择场景。<a href="https://www.citibank.com.sg/credit-cards/points/rewards-card" target="_blank" rel="noreferrer">Citi 官方规则</a> · <a href="https://milelion.com/2026/02/27/review-citi-rewards-credit-card/" target="_blank" rel="noreferrer">MileLion 2026 分析</a></div>
+        </section>
+        <section class="panel" style="margin-bottom:17px;border-color:#ead4a8" id="atomeGuardPanel">
+          <div class="herohead"><h2 style="margin:0">🔔 Atome 付款前警示</h2><span class="pill warn">MILELION · 条件核对</span></div>
+          <p class="sectiondesc">Atome 通常以线上 MCC 5999 入账，<strong>不是实体店 NFC</strong>。PPV、Visa Signature、Citi Rewards Mastercard、HSBC Revolution 的待遇不同；不把社区实测当作银行保证。</p>
+          <div class="two"><div class="formrow"><label for="atomeCard">Atome 扣款卡</label><select id="atomeCard"><option value="ppv" selected>UOB Preferred Visa (原 PPV)</option><option value="vs">UOB Visa Signature</option><option value="citi">Citi Rewards Mastercard</option><option value="hsbc">HSBC Revolution</option><option value="lady">UOB Lady's Solitaire (Travel / Transport)</option><option value="other">其他卡 / 未核实</option></select></div>
+          <div class="formrow"><label for="atomeMethod">Atome 付款 / 扣款方式</label><select id="atomeMethod"><option value="direct" selected>直接绑定信用卡</option><option value="apple">Atome 内 Apple Pay</option><option value="google">Atome 内 Google Pay</option><option value="auto">第 2/3 期自动扣款</option><option value="manual">第 2/3 期手动付款</option></select></div></div>
+          <div class="formrow"><label for="atomeCurrency">交易货币</label><select id="atomeCurrency"><option value="SGD" selected>SGD · 新加坡元</option><option value="FCY">FCY · 外币（需确认实际记账）</option></select></div>
+          <div id="atomeGuardAlert" class="notice" role="alert" aria-live="assertive"></div>
+          <div class="hint">Atome / BNPL 提醒只在你打开本工具检查时出现，不能自动侦测其他 App 的付款画面。<a href="https://milelion.com/2026/02/08/whats-the-best-card-to-use-for-atome/" target="_blank" rel="noreferrer">MileLion：Atome 最新专题</a> · <a href="https://milelion.com/2025/01/13/what-counts-as-a-contactless-payment/" target="_blank" rel="noreferrer">MileLion：何谓 Contactless</a></div>
+        </section>
+        <div id="hero" class="hero" aria-live="polite"></div>
+        <section class="panel">
+          <h2>03 / 候选付款方案</h2><p class="sectiondesc">按「已满足的条件」排名；现金优惠和估计里程价值分开列示。</p>
+          <div id="ranking"></div>
+          <details><summary>查看完整方案计算表（含不推荐方案）</summary><div class="tablewrap" id="allOptions"></div></details>
+        </section>
+        <section class="panel">
+          <h2>04 / MCC 不确定性敏感度</h2><p class="sectiondesc">同一笔 S$480，改变 MCC 假设时，推荐卡片是否变化？这不是商家 MCC 的预测。</p>
+          <div class="split" id="scenario"></div>
+        </section>
+        <section class="panel">
+          <h2>05 / 不可叠加、不可确认与不适用</h2><p class="sectiondesc">显示被规则引擎排除的奖励，不用人工凑高数字。</p>
+          <div class="split" id="exclusions"></div>
+        </section>
+        <section class="panel">
+          <h2>06 / 模拟卡片 + 规则溯源</h2><p class="sectiondesc">所有信用卡、奖励倍率、优惠金额和额度消耗均为刻意设计的测试夹具，不是实际银行条款。</p>
+          <div class="tablewrap"><table><thead><tr><th>虚构卡片</th><th>奖励规则</th><th>周期</th><th>本期余额</th></tr></thead><tbody id="cardrules"></tbody></table></div>
+          <div class="sep"></div>
+          <div class="sources"><strong>事实参考（仅 MCC 定义）：</strong>Mastercard 官方 2026 年 Merchant Quick Reference 将 8043 定义为 Opticians / Optical Goods / Eyeglasses；8042 对应视光师和眼科相关服务。实际商户 MCC 要单独验证。<br><a href="https://www.mastercard.com/content/dam/mccom/shared/business/support/rules-pdfs/mastercard-quick-reference-booklet-merchant.pdf" target="_blank" rel="noreferrer">Mastercard MCC 官方文档</a> · <a href="https://milelion.com/2025/01/19/how-to-check-merchant-category-codes-mccs-before-making-a-purchase/" target="_blank" rel="noreferrer">MileLion：怎样检查 MCC</a></div>
+        </section>
+        <section class="panel">
+          <h2>07 / 审计日志与测试</h2><p class="sectiondesc">每条建议含输入、规则版本、候选方案、排除原因、计算细节，可导出 JSON。</p>
+          <div class="buttons"><button class="btn" id="export">导出审计 JSON</button><button class="btn secondary" id="runTests">运行 21 项内建测试</button></div>
+          <div id="testResults" class="selftests" role="status"></div>
+          <details><summary>查看本次决策审计 JSON（预览）</summary><pre class="audit" id="audit"></pre></details>
+        </section>
+        <p class="footer">SG Miles Companion V0.2 · 纯 HTML / CSS / JS · 无登录、无 API、无上传；只在当前浏览器保存表单设定。注意：MCC、银行规则、优惠与里程估值均需实际验证后才能用于真实付款。</p>
+      </section>
+    </div>
+  </main>
+  <script id="app-code">
+  'use strict';
+  const ENGINE_VERSION = 'sg-miles-mvp-0.2.0';
+  const RULESET_VERSION = 'DEMO_FIXTURES_2026_11_14_V1+KRIS_ATOME_GUARDS_2026_11_15';
+  const INITIAL = Object.freeze({merchant:'Demo Optical SG（虚构）',amount:480,date:'2026-11-14',channel:'pos',mcc:'unknown',usedA:200,voucher:true,mallVoucher:false,mileValue:0.015});
+  // All card names and every card earning condition below are fictional test fixtures.
+  const DEMO_CARDS = Object.freeze([
+    {id:'A',name:'模拟卡 A · Optical Boost',baseMpd:1,bonusMpd:4,bonusMcc:['8043'],bonusChannels:['pos'],cap:500,cycle:'statement',cutoff:18,usedField:'usedA',source:'DEMO-A-01'},
+    {id:'B',name:'模拟卡 B · Anytime',baseMpd:1.2,bonusMpd:null,bonusMcc:[],bonusChannels:[],cap:null,cycle:'calendar',source:'DEMO-B-01'},
+    {id:'C',name:'模拟卡 C · Online Bonus',baseMpd:1,bonusMpd:4,bonusMcc:['8043','5999'],bonusChannels:['online'],cap:1000,cycle:'calendar',usedFixed:100,source:'DEMO-C-01'}
+  ]);
+  const DEMO_OFFERS = Object.freeze([
+    {id:'optical30',name:'模拟眼镜券 S$30',kind:'fixed',discount:30,minSpend:400,channels:['pos'],requiresVoucherToggle:true,notStackableWith:['mall15','krisqr'],source:'DEMO-OFFER-01'},
+    {id:'mall15',name:'模拟商场券 5% (封顶 S$15)',kind:'percent',percent:0.05,maxDiscount:15,channels:['pos'],notStackableWith:['optical30','krisqr'],source:'DEMO-OFFER-02'},
+    {id:'krisqr',name:'模拟 App QR 额外 2 mpd',kind:'appMpd',mpd:2,channels:['appqr'],notStackableWith:['optical30','mall15'],source:'DEMO-OFFER-03'}
+  ]);
+  const round2 = n=>Math.round((n+Number.EPSILON)*100)/100;
+  const money = n=>'S$'+Number(n).toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const escapeHtml = s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const monthLastDay=(y,m)=>new Date(Date.UTC(y,m,0)).getUTCDate();
+  const isoDay=(y,m,d)=>`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  function cycleLabel(card,date){
+    const [y,m,d]=date.split('-').map(Number);
+    if(card.cycle==='calendar')return `${y}-${String(m).padStart(2,'0')} (Calendar Month)`;
+    const endThis = Math.min(card.cutoff,monthLastDay(y,m));
+    if(d<=endThis)return `${isoDay(y,m,endThis)} (Statement End)`;
+    const nextM=m===12?1:m+1, nextY=m===12?y+1:y;
+    return `${isoDay(nextY,nextM,Math.min(card.cutoff,monthLastDay(nextY,nextM)))} (Statement End)`;
+  }
+  function normalize(x){
+    const v={...INITIAL,...x};
+    v.amount=Number(v.amount);v.usedA=Number(v.usedA);v.mileValue=Number(v.mileValue);
+    if(!Number.isFinite(v.amount)||v.amount<=0||v.amount>100000)throw Error('金额必须大于 S$0，且不超过 S$100,000。');
+    if(!Number.isFinite(v.usedA)||v.usedA<0||v.usedA>500)throw Error('模拟卡 A 已使用奖励额度必须介于 S$0 至 S$500。');
+    if(!Number.isFinite(v.mileValue)||v.mileValue<0||v.mileValue>0.1)throw Error('里程估值不合理。');
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(v.date)||Number.isNaN(Date.parse(v.date+'T00:00:00Z')))throw Error('交易日期无效。');
+    if(!['pos','appqr','online'].includes(v.channel))throw Error('支付渠道无效。');
+    if(!['unknown','8043','8042','5999'].includes(v.mcc))throw Error('MCC 选择无效。');
+    v.voucher=Boolean(v.voucher);v.mallVoucher=Boolean(v.mallVoucher);v.merchant=String(v.merchant||'未命名商家');
+    return v;
+  }
+  function offersFor(input){
+    const o=[{id:'none',name:'不使用优惠',discount:0,appMpd:0}];
+    if(input.channel==='pos'){
+      if(input.voucher&&input.amount>=400)o.push({id:'optical30',name:'模拟眼镜券 S$30',discount:Math.min(30,input.amount),appMpd:0});
+      if(input.mallVoucher)o.push({id:'mall15',name:'模拟商场券 5% (封顶 S$15)',discount:Math.min(15,round2(input.amount*.05)),appMpd:0});
+    }
+    if(input.channel==='appqr')o.push({id:'krisqr',name:'模拟 App QR 额外 2 mpd',discount:0,appMpd:2});
+    return o;
+  }
+  function evaluate(input,card,offer){
+    const payable=round2(input.amount-offer.discount);
+    const used=card.usedField==='usedA'?input.usedA:(card.usedFixed||0);
+    const remaining=card.cap==null?null:round2(Math.max(0,card.cap-used));
+    const matchedMcc=card.bonusMcc.includes(input.mcc);
+    const matchedChannel=card.bonusChannels.includes(input.channel);
+    // Unknown MCC never earns category-based bonus in committed estimates.
+    const eligible=Boolean(card.bonusMpd&&input.mcc!=='unknown'&&matchedMcc&&matchedChannel);
+    const bonusSpend=eligible?round2(Math.min(payable,remaining)):0;
+    const normalSpend=round2(payable-bonusSpend);
+    // Illustrative rounding, not actual bank accounting rules.
+    const cardMiles=Math.floor(bonusSpend*(card.bonusMpd||0)+normalSpend*card.baseMpd+1e-7);
+    const appMiles=Math.floor(payable*offer.appMpd+1e-7);
+    const miles=cardMiles+appMiles;
+    const milesValue=round2(miles*input.mileValue);
+    const totalValue=round2(offer.discount+milesValue);
+    const why=[];
+    if(input.mcc==='unknown'&&card.bonusMpd&&matchedChannel)why.push('MCC 未知：MCC 类别加成不能确认，按基础倍率计算');
+    if(card.bonusMpd&&!matchedChannel)why.push('支付渠道不符合该卡模拟加成规则');
+    if(card.bonusMpd&&input.mcc!=='unknown'&&!matchedMcc)why.push(`MCC ${input.mcc} 不在该卡模拟加成名单`);
+    if(eligible&&bonusSpend<payable)why.push(`加成额度仅剩 ${money(remaining)}，超出部分按基础倍率`);
+    if(offer.id==='krisqr')why.push('App QR 奖励只通过模拟 QR 路由获得；卡片 A 的 POS 加成不可同时获得');
+    if(offer.id==='optical30')why.push('模拟眼镜券已应用；不可与模拟商场券或 App QR 优惠叠加');
+    if(offer.id==='mall15')why.push('模拟商场券不可与模拟眼镜券或 App QR 优惠叠加');
+    return {id:`${card.id}-${offer.id}`,cardId:card.id,cardName:card.name,offerId:offer.id,offer:offer.name,amount:input.amount,discount:round2(offer.discount),payable,bonusSpend,normalSpend,remaining,used,cardMiles,appMiles,miles,milesValue,totalValue,why,source:[card.source,offer.id==='none'?'NO-OFFER':DEMO_OFFERS.find(o=>o.id===offer.id).source],formula:`(${money(bonusSpend)} × ${card.bonusMpd||card.baseMpd} mpd) + (${money(normalSpend)} × ${card.baseMpd} mpd) + (${money(payable)} × ${offer.appMpd} App mpd) → ${miles} miles; ${money(offer.discount)} + (${miles} × ${money(input.mileValue)}) = ${money(totalValue)}`};
+  }
+  function analyze(raw){
+    const input=normalize(raw);
+    const options=[];
+    for(const card of DEMO_CARDS)for(const offer of offersFor(input))options.push(evaluate(input,card,offer));
+    options.sort((a,b)=>b.totalValue-a.totalValue||b.discount-a.discount||b.miles-a.miles||a.id.localeCompare(b.id));
+    const excluded=[
+      {name:'ENTERTAINER B1F1',status:'不适用',reason:'本例为眼镜店；未创建任何餐厅 B1F1 合资格权益。'},
+      {name:'ShopBack cashback',status:'未计入',reason:'本次是店内支付，未验证商家可追踪的 ShopBack 入口/付款链路。'},
+      {name:'CapitaStar / Changi Rewards',status:'待验证',reason:'商家是否参加、收据/绑定条件均未知，不把潜在积分算入。'},
+      {name:'Trip.com / Atome',status:'不适用 / 待验证',reason:'本例不是 Trip.com 订单；未确认商户支持 Atome 及其卡奖励资格。'},
+      {name:'模拟眼镜券 + 模拟商场券',status:'禁止叠加',reason:'两个促销在 DEMO-OFFER-01/02 中设为互斥，不生成合并方案。'},
+      {name:'模拟眼镜券 + App QR',status:'禁止叠加',reason:'DEMO-OFFER-01/03 互斥；App QR 路由不会同时享有 POS 现金券。'},
+      {name:'模拟卡 A POS 4 mpd + App QR 2 mpd',status:'禁止叠加',reason:'两个收益分属不同支付渠道，不能当作同一笔交易加总。'}
+    ];
+    if(input.mcc==='unknown')excluded.unshift({name:'MCC 专属 4 mpd',status:'未知，不计算',reason:'没有已核实的商户 MCC，卡 A 或卡 C 的条件加成不得写成已取得。'});
+    if(input.channel==='pos')excluded.push({name:'模拟卡 C Online 4 mpd',status:'不适用',reason:'本次采用 POS 实体刷卡，不满足 online 限定。'});
+    if(!input.voucher)excluded.push({name:'模拟 S$30 眼镜券',status:'未启用',reason:'此商家没有确认可用的优惠；不作现金节省承诺。'});
+    if(!input.mallVoucher)excluded.push({name:'模拟商场券 5%',status:'未启用',reason:'商场券未确认可用；不能自动计算这 S$15 的现金优惠。'});
+    return {engine:ENGINE_VERSION,ruleset:RULESET_VERSION,input,ranking:options,selected:options[0],excluded,cards:DEMO_CARDS.map(c=>({...c,currentCycle:cycleLabel(c,input.date),demoSpent:c.usedField==='usedA'?input.usedA:(c.usedFixed||0)})),caveats:['所有银行卡名称、门槛、周期已用金额及促销均为虚构测试数据，不适用于真实付款决策。','仅 MCC 8042/8043 的业务分类引用官方定义；具体商家 MCC 一律未查证。','金额示例未考虑 GST/服务费、特殊银行排除、分笔交易、入账时间和真实积分舍入。','模型评分采用用户选定的假设 mile valuation，不是可兑现现金。']};
+  }
+  // Guard is intentionally separate from the fictional card-ranking engine. Never grant Citi 4 mpd on in-app wallets.
+  const KRIS_GUARD_SOURCE = 'https://www.citibank.com.sg/credit-cards/points/rewards-card';
+  function checkKrisGuard({app,card,method}){
+    if(!['krisplus','none','krisflyer'].includes(app)||!['citi','hsbc','ppv','vs','amaze'].includes(card)||!['inapp_google','inapp_apple','nfc','direct'].includes(method))throw Error('无效 Kris+ 检查参数');
+    const inApp=method==='inapp_google'||method==='inapp_apple';
+    if(app==='krisplus'&&card==='citi'&&inApp)return {severity:'blocked',code:'CITI_REWARDS_KRISPLUS_INAPP_WALLET_NO_4MPD',headline:'⛔ Citi Rewards Mastercard 不符合 4 mpd',detail:'Kris+ App 内使用 Google Pay / Apple Pay 被 Citi 视为线上 mobile wallet 交易，不能获得 10X（4 mpd）加成；普通合资格消费通常只有基本 0.4 mpd。不要占用或计入 Citi 4 mpd 奖励额度。',expectedBonusMpd:0,baseMpd:0.4,source:KRIS_GUARD_SOURCE};
+    if(app==='krisplus'&&card==='amaze'&&inApp)return {severity:'conditional',code:'AMAZE_CITI_CONDITIONAL',headline:'⚠️ amaze → Citi 可能不同，但不能保证 4 mpd',detail:'改用 amaze 作为 Google Pay / Apple Pay 扣款卡，且 amaze 绑定 Citi Rewards，可能符合高倍积分条件；但仍须检查该商户 MCC、交易编码、额度、最新 amaze 与 Citi 条款，以及本地 SGD 消费可能产生的 1% 费用。',expectedBonusMpd:null,source:KRIS_GUARD_SOURCE};
+    if(app==='krisplus'&&!inApp)return {severity:'not_applicable',code:'KRISPLUS_CHANNEL_MISMATCH',headline:'⚠️ 这不是 Kris+ App 内付款方式',detail:'实体店手机 NFC 或网页直接输卡号和 Kris+ App 内 Google Pay/Apple Pay 是不同交易路径。请改选实际使用的路径，不要套用 Citi 在 Kris+ 的判断。',expectedBonusMpd:null,source:KRIS_GUARD_SOURCE};
+    if(app==='krisplus'&&card==='vs'&&inApp)return {severity:'blocked',code:'UOB_VS_KRISPLUS_SGD_INAPP_NOT_CONTACTLESS',headline:'⛔ UOB Visa Signature：Kris+ SGD App 内付款不属于实体 Contactless',detail:'本地 SGD in-app Apple/Google Pay 不触发 UOB VS 的实体感应 4 mpd；若实际为符合 FCY 门槛的外币交易，须另按 FCY 奖励规则检查。',expectedBonusMpd:0,source:'https://milelion.com/2025/01/13/what-counts-as-a-contactless-payment/'};
+    if(app==='krisplus'&&card==='ppv'&&inApp)return {severity:'conditional',code:'UOB_PPV_KRISPLUS_ONLINE_MCC_CHECK',headline:'⚠️ UOB PPV：Kris+ in-app 不属于手机 NFC',detail:'不能按 Mobile Contactless 4 mpd 计算；若商户实际 MCC 在 PPV 线上白名单（如 5812）中，仍可能从 Selected Online 类别赚取 4 mpd（每月该类别 S$600 上限），需要核对实际 MCC/入账。',expectedBonusMpd:null,source:'https://milelion.com/2026/03/29/review-uob-preferred-platinum-visa-card/'};
+    if(app==='krisplus')return {severity:'conditional',code:'OTHER_CARD_CONDITIONAL',headline:'ℹ️ 其他卡需核查资格，不自动承诺 4 mpd',detail:'请确认对应信用卡在 Kris+ App 内钱包交易的奖励条件、商户 MCC、每月额度和排除条款。',expectedBonusMpd:null,source:KRIS_GUARD_SOURCE};
+    if(app==='krisflyer')return {severity:'info',code:'KRISFLYER_NOT_KRISPLUS',headline:'ℹ️ KrisFlyer 账户不等于 Kris+ App 付款',detail:'本警示只针对 Kris+ App 内 Google Pay/Apple Pay 使用 Citi Rewards。普通 KrisFlyer 里程账户操作不能套用此阻止规则。',expectedBonusMpd:null,source:KRIS_GUARD_SOURCE};
+    return {severity:'info',code:'KRISPLUS_NOT_SELECTED',headline:'ℹ️ 未选择 Kris+ 场景',detail:'当准备在 Kris+ App 内付款时，选择 Kris+ + Citi Rewards + Google Pay/Apple Pay，将自动出现红色警示。',expectedBonusMpd:null,source:KRIS_GUARD_SOURCE};
+  }
+  const ATOME_SOURCE = 'https://milelion.com/2026/02/08/whats-the-best-card-to-use-for-atome/';
+  const CONTACTLESS_SOURCE = 'https://milelion.com/2025/01/13/what-counts-as-a-contactless-payment/';
+  // Auditable risk guard; conditional cases MUST NOT be counted as assured 4 mpd.
+  function checkAtomeGuard({card,method,currency}){
+    if(!['ppv','vs','citi','hsbc','lady','other'].includes(card)||!['direct','apple','google','auto','manual'].includes(method)||!['SGD','FCY'].includes(currency))throw Error('无效 Atome 检查参数');
+    const shared='Atome 一般以 online / MCC 5999 入账；不能自动当作实体 NFC contactless。';
+    if(method==='google')return {severity:'blocked',code:'ATOME_GOOGLE_PAY_NOT_SUPPORTED_PER_SOURCE',headline:'⛔ MileLion 2026 资料指出 Atome 不支持 Google Pay',detail:'请核对 Atome App 当前可选的付款方式；不能套用 Google Pay / NFC 4 mpd 逻辑。'+shared,expectedBonusMpd:0,source:ATOME_SOURCE};
+    if(card==='vs'&&currency==='SGD')return {severity:'blocked',code:'ATOME_UOB_VS_SGD_NOT_CONTACTLESS',headline:'⛔ UOB Visa Signature：SGD Atome 不符合 Contactless 4 mpd',detail:shared+' UOB VS 的本地 SGD 4 mpd 必须符合实体感应付款（及每账单周期 S$1,000 门槛）；Atome in-app 和绑卡扣款不属于实体 NFC。',expectedBonusMpd:0,source:CONTACTLESS_SOURCE};
+    if(card==='vs')return {severity:'conditional',code:'ATOME_UOB_VS_FCY_CHECK',headline:'⚠️ UOB Visa Signature：只有符合 FCY 类别才可能高倍',detail:'不能以 Contactless 类别计算。必须确认 Atome 实际以外币记账、FCY S$1,000 门槛、每账单周期 S$1,200 上限及排除条件。',expectedBonusMpd:null,source:CONTACTLESS_SOURCE};
+    if(card==='ppv'&&method==='direct')return {severity:'blocked',code:'ATOME_PPV_DIRECT_UNRELIABLE_NO_BONUS',headline:'⛔ UOB PPV 直接绑卡：不可预期 4 mpd',detail:shared+' MileLion 报告直接使用 PPV 不会获得预期积分，且 Atome/BNPL 对 PPV 的用户实测结果不一致。避免用来追求 4 mpd。',expectedBonusMpd:0,source:ATOME_SOURCE};
+    if(card==='ppv')return {severity:'conditional',code:'ATOME_PPV_APPLE_PAY_CONFLICTING_REPORTS',headline:'⚠️ UOB PPV：Atome Apple Pay 的 4 mpd 没有保证',detail:'MCC 5999 在 PPV Online 白名单，但 MileLion 同时记录有人获奖、有人未获 9X UNI$。可能涉及 BNPL/账单识别，默认不计 4 mpd；先以小额交易核实奖励到账。'+(method==='auto'?' 自动扣款还可能有 recurring 风险。':''),expectedBonusMpd:null,source:ATOME_SOURCE};
+    if(card==='lady')return {severity:'blocked',code:'ATOME_UOB_LADY_MCC_5999_NOT_ELIGIBLE',headline:'⛔ UOB Lady’s Solitaire：Atome MCC 5999 不属于 Travel / Transport',detail:shared+' 不能因为原商家是交通或旅游就套用 Lady’s Solitaire 的奖励类别。',expectedBonusMpd:0,source:ATOME_SOURCE};
+    if(card==='citi'||card==='hsbc')return {severity:'conditional',code:card==='citi'?'ATOME_CITI_MASTERCARD_POTENTIAL_4MPD':'ATOME_HSBC_REVOLUTION_POTENTIAL_4MPD',headline:'✅ '+(card==='citi'?'Citi Rewards Mastercard':'HSBC Revolution')+'：MileLion 列为 Atome 4 mpd 可选卡',detail:shared+' 须检查每期付款实际入账、卡片剩余高倍额度（Citi：Statement Month；HSBC：Calendar Month）、MCC/排除项。'+(method==='auto'?' 自动扣款可能被视为 recurring，建议手动处理第 2/3 期。':' 后续分期尽量在 Atome Bills 手动付款，降低 recurring 风险。')+' 本工具不在未核对银行入账前保证积分。',expectedBonusMpd:null,source:ATOME_SOURCE};
+    return {severity:'conditional',code:'ATOME_OTHER_CARD_UNVERIFIED',headline:'⚠️ 此卡 Atome 高倍奖励资格未核实',detail:shared+' 查看银行条款和 MileLion 后才能纳入正式 4 mpd 推荐。',expectedBonusMpd:null,source:ATOME_SOURCE};
+  }
+  function runSelfTests(){
+    const tests=[];
+    const check=(name,fn)=>{try{if(!fn())throw Error('断言失败');tests.push({name,pass:true});}catch(e){tests.push({name,pass:false,error:e.message});}};
+    const x=analyze(INITIAL);
+    check('01 未知 MCC 不触发类别 4 mpd',()=>x.ranking.filter(o=>o.cardId==='A').every(o=>o.bonusSpend===0));
+    check('02 默认 S$480 + 券，模拟卡 B 540 miles / S$30 现金省',()=>x.selected.cardId==='B'&&x.selected.offerId==='optical30'&&x.selected.miles===540&&x.selected.discount===30);
+    const y=analyze({...INITIAL,mcc:'8043'});
+    check('03 已核实 8043：A 仅剩 S$300 高倍额度→1350 miles',()=>y.selected.cardId==='A'&&y.selected.offerId==='optical30'&&y.selected.miles===1350&&y.selected.bonusSpend===300);
+    const z=analyze({...INITIAL,mcc:'8042'});
+    check('04 8042 不能冒充 8043 加成',()=>z.ranking.filter(o=>o.cardId==='A').every(o=>o.bonusSpend===0));
+    check('05 in-store POS 不得触发 Online 卡 C 4 mpd',()=>x.ranking.filter(o=>o.cardId==='C').every(o=>o.bonusSpend===0));
+    const q=analyze({...INITIAL,mcc:'8043',usedA:500});
+    check('06 额度耗尽时 A 全部按基础倍率',()=>q.ranking.filter(o=>o.cardId==='A').every(o=>o.bonusSpend===0));
+    const a=analyze({...INITIAL,mcc:'8043',channel:'appqr'});
+    check('07 App QR 无 POS 券，不得叠加卡 A POS 奖励',()=>a.ranking.every(o=>o.discount===0)&&(a.ranking.filter(o=>o.cardId==='A').every(o=>o.bonusSpend===0)));
+    const n=analyze({...INITIAL,voucher:false});
+    const dual=analyze({...INITIAL,mallVoucher:true});
+    check('08 未确认优惠为零；两张券永不叠加',()=>n.ranking.every(o=>o.discount===0)&&dual.ranking.every(o=>o.discount<=30&&!(o.offerId==='optical30+mall15')));
+    check('09 Kris+ Google Pay + Citi 不给 4 mpd',()=>checkKrisGuard({app:'krisplus',card:'citi',method:'inapp_google'}).expectedBonusMpd===0);
+    check('10 Kris+ Apple Pay + Citi 不给 4 mpd',()=>checkKrisGuard({app:'krisplus',card:'citi',method:'inapp_apple'}).code==='CITI_REWARDS_KRISPLUS_INAPP_WALLET_NO_4MPD');
+    check('11 NFC 与 Kris+ in-app 不可混淆',()=>checkKrisGuard({app:'krisplus',card:'citi',method:'nfc'}).code==='KRISPLUS_CHANNEL_MISMATCH');
+    check('12 amaze 路径标条件性而非保证高倍',()=>checkKrisGuard({app:'krisplus',card:'amaze',method:'inapp_google'}).expectedBonusMpd===null);
+    check('13 Atome PPV 直接绑卡不给保证 4 mpd',()=>checkAtomeGuard({card:'ppv',method:'direct',currency:'SGD'}).expectedBonusMpd===0);
+    check('14 Atome PPV Apple Pay 记录冲突，需人工核实',()=>checkAtomeGuard({card:'ppv',method:'apple',currency:'SGD'}).expectedBonusMpd===null);
+    check('15 Atome Visa Signature SGD 不算 Contactless 4 mpd',()=>checkAtomeGuard({card:'vs',method:'direct',currency:'SGD'}).expectedBonusMpd===0);
+    check('16 Atome Visa Signature FCY 需另查门槛',()=>checkAtomeGuard({card:'vs',method:'direct',currency:'FCY'}).expectedBonusMpd===null);
+    check('17 Atome Citi Rewards Mastercard 为条件性候选',()=>checkAtomeGuard({card:'citi',method:'direct',currency:'SGD'}).code==='ATOME_CITI_MASTERCARD_POTENTIAL_4MPD');
+    check('18 Atome HSBC Revolution 为条件性候选',()=>checkAtomeGuard({card:'hsbc',method:'manual',currency:'SGD'}).code==='ATOME_HSBC_REVOLUTION_POTENTIAL_4MPD');
+    check('19 Atome Google Pay 不可直接套用',()=>checkAtomeGuard({card:'citi',method:'google',currency:'SGD'}).expectedBonusMpd===0);
+    check('20 Atome Lady’s Solitaire Travel 不可套 MCC 5999',()=>checkAtomeGuard({card:'lady',method:'direct',currency:'SGD'}).expectedBonusMpd===0);
+    check('21 Kris+ UOB VS SGD in-app 不算 Contactless',()=>checkKrisGuard({app:'krisplus',card:'vs',method:'inapp_google'}).expectedBonusMpd===0);
+    return tests;
+  }
+  globalThis.SGMilesEngine={analyze,checkKrisGuard,checkAtomeGuard,runSelfTests,INITIAL,DEMO_CARDS,DEMO_OFFERS,cycleLabel,ENGINE_VERSION,RULESET_VERSION};
+  if(typeof document!=='undefined')document.addEventListener('DOMContentLoaded',()=>{
+    const $=id=>document.getElementById(id);
+    const fields=['merchant','amount','date','channel','mcc','usedA','voucher','mallVoucher','mileValue'];
+    const getInput=()=>Object.fromEntries(fields.map(id=>[id,['voucher','mallVoucher'].includes(id)?$(id).checked:$(id).value]));
+    let report=null;
+    const guardFields=['guardApp','guardCard','guardMethod'];
+    const atomeFields=['atomeCard','atomeMethod','atomeCurrency'];
+    const atomeInput=()=>({card:$('atomeCard').value,method:$('atomeMethod').value,currency:$('atomeCurrency').value});
+    const guardInput=()=>({app:$('guardApp').value,card:$('guardCard').value,method:$('guardMethod').value});
+    function renderKrisGuard(){
+      const g=checkKrisGuard(guardInput()),el=$('krisGuardAlert');
+      el.className='notice'+(g.severity==='blocked'?' red':'');
+      el.innerHTML=`<strong>${escapeHtml(g.headline)}</strong><div style="margin-top:6px">${escapeHtml(g.detail)}</div><div class="hint">Rule ID: ${escapeHtml(g.code)}</div>`;
+      updateAudit();
+      return g;
+    }
+    function renderAtomeGuard(){
+      const g=checkAtomeGuard(atomeInput()),el=$('atomeGuardAlert');
+      el.className='notice'+(g.severity==='blocked'?' red':'');
+      el.innerHTML=`<strong>${escapeHtml(g.headline)}</strong><div style="margin-top:6px">${escapeHtml(g.detail)}</div><div class="hint">Rule ID: ${escapeHtml(g.code)}</div>`;
+      updateAudit();
+      return g;
+    }
+    function updateAudit(){
+      if(!report)return;
+      $('audit').textContent=JSON.stringify({generatedAt:new Date().toISOString(),...report,krisPlusGuard:{input:guardInput(),result:checkKrisGuard(guardInput())},atomeGuard:{input:atomeInput(),result:checkAtomeGuard(atomeInput())}},null,2);
+    }
+    function setInput(vals){for(const id of fields){if(['voucher','mallVoucher'].includes(id))$(id).checked=Boolean(vals[id]);else $(id).value=vals[id];}}
+    function persist(input){try{localStorage.setItem('sg_miles_companion_demo_v01',JSON.stringify(input));}catch(e){/* file origins may disallow storage */}}
+    function render(raw){
+      try{report=analyze(raw);$('formerror').style.display='none';persist(report.input);}catch(e){$('formerror').textContent=e.message;$('formerror').style.display='block';return;}
+      const r=report,b=r.selected,unknown=r.input.mcc==='unknown';
+      $('cycle-note').textContent=`当前模拟周期：${cycleLabel(DEMO_CARDS[0],r.input.date)}。模拟卡 A 上限 S$500，剩 ${money(500-r.input.usedA)}。这不是已对账额度。`;
+      const outcome=unknown?'保守建议 · MCC 待核实':'条件建议 · MCC 由用户假设已核实';
+      $('hero').innerHTML=`<div class="herohead"><span class="pill ${unknown?'warn':''}">${unknown?'⚠ MCC 未知':'✓ MCC '+escapeHtml(r.input.mcc)+'（假设已核实）'}</span><span class="tiny">${escapeHtml(r.input.channel)} · ${escapeHtml(r.input.date)} · ${escapeHtml(r.ruleset)}</span></div><h2>${escapeHtml(b.cardName)} + ${escapeHtml(b.offer)}</h2><div class="sub">${outcome}。输入店名：${escapeHtml(r.input.merchant)}。${unknown?'任何 4 mpd 类别加成未计入正式建议。':'类别加成仅在模拟规则成立时计算。'}</div><div class="biggrid"><div class="metric"><div class="k">假设现金优惠</div><div class="v">${money(b.discount)}</div><div class="s">账单应付 ${money(b.payable)}</div></div><div class="metric"><div class="k">模拟可得里程</div><div class="v">${b.miles.toLocaleString('en-SG')}</div><div class="s">卡 ${b.cardMiles} + App ${b.appMiles}</div></div><div class="metric"><div class="k">假设综合价值</div><div class="v">${money(b.totalValue)}</div><div class="s">现金折扣 + miles × ${(r.input.mileValue*100).toFixed(1)}¢</div></div></div><div class="notice">${unknown?'尚未确认商户 MCC：不能保证类别奖励。':''}演示现金券、卡片倍率、已用额度与 App 规则均为模拟数据，<strong>不可作为真实刷卡建议。</strong></div>`;
+      $('ranking').innerHTML=r.ranking.slice(0,4).map((o,i)=>`<article class="cardoption ${i===0?'top1':''}"><div><span class="pill ${i===0?'':'gray'}">${i===0?'第 1 方案':`第 ${i+1} 方案`}</span><h3 style="margin-top:9px">${escapeHtml(o.cardName)}</h3><div class="leftdetail">${escapeHtml(o.offer)} · 应付 ${money(o.payable)}</div><div class="sub">${escapeHtml(o.formula)}</div>${o.why.map(w=>`<div class="tiny">• ${escapeHtml(w)}</div>`).join('')}</div><div class="cright"><div class="amount">${money(o.totalValue)}</div><div class="sub">优惠 ${money(o.discount)}<br>${o.miles} miles</div></div></article>`).join('');
+      $('allOptions').innerHTML=`<table><thead><tr><th>卡 / 优惠</th><th class="num">现金省</th><th class="num">高倍消费</th><th class="num">预估 Miles</th><th class="num">综合价值</th></tr></thead><tbody>${r.ranking.map(o=>`<tr><td>${escapeHtml(o.cardName)}<div class="sub">${escapeHtml(o.offer)}</div></td><td class="num">${money(o.discount)}</td><td class="num">${money(o.bonusSpend)}</td><td class="num">${o.miles}</td><td class="num">${money(o.totalValue)}</td></tr>`).join('')}</tbody></table>`;
+      const scs=[['unknown','MCC 未知'],['8043','若商户为 8043'],['8042','若商户为 8042'],['5999','若商户为 5999']];
+      $('scenario').innerHTML=scs.map(([m,label])=>{let a=analyze({...r.input,mcc:m});return `<div class="fact ${m==='unknown'?'unknown':''}"><span class="pill ${m==='unknown'?'warn':'gray'}">${escapeHtml(label)}</span><h3 style="margin-top:8px">${escapeHtml(a.selected.cardName)}</h3><p>${escapeHtml(a.selected.offer)}<br>现金省 ${money(a.selected.discount)} · ${a.selected.miles} miles<br><strong>估值 ${money(a.selected.totalValue)}</strong></p></div>`;}).join('');
+      $('exclusions').innerHTML=r.excluded.map(i=>`<div class="fact ${i.status.includes('禁止')?'fail':'unknown'}"><h3>${escapeHtml(i.name)}</h3><span class="pill ${i.status.includes('禁止')?'red':'gray'}">${escapeHtml(i.status)}</span><p>${escapeHtml(i.reason)}</p></div>`).join('');
+      $('cardrules').innerHTML=r.cards.map(c=>`<tr><td><strong>${escapeHtml(c.name)}</strong><div class="sub">${escapeHtml(c.source)}</div></td><td>基础 ${c.baseMpd} mpd${c.bonusMpd?`<br>条件 ${c.bonusMpd} mpd · MCC ${c.bonusMcc.join('/')} · ${c.bonusChannels.join('/')}`:''}</td><td>${escapeHtml(c.currentCycle)}</td><td>${c.cap==null?'无模拟上限':`${money(c.cap)} cap · 已用 ${money(c.demoSpent)} · 余 ${money(c.cap-c.demoSpent)}`}</td></tr>`).join('');
+      updateAudit();
+    }
+    const saved=(()=>{try{return JSON.parse(localStorage.getItem('sg_miles_companion_demo_v01'));}catch(e){return null;}})();
+    if(saved)setInput({...INITIAL,...saved});
+    for(const id of guardFields)$(id).addEventListener('change',renderKrisGuard);
+    for(const id of atomeFields)$(id).addEventListener('change',renderAtomeGuard);
+    $('merchant').addEventListener('input',()=>{if($('merchant').value!==INITIAL.merchant){$('voucher').checked=false;$('mallVoucher').checked=false;}});
+    for(const id of fields)$(id).addEventListener(['voucher','mallVoucher'].includes(id)?'change':'input',()=>render(getInput()));
+    $('refresh').addEventListener('click',()=>render(getInput()));
+    $('reset').addEventListener('click',()=>{setInput(INITIAL);render(getInput());$('testResults').style.display='none';});
+    $('runTests').addEventListener('click',()=>{let out=runSelfTests(),ok=out.filter(t=>t.pass).length;$('testResults').style.display='block';$('testResults').textContent=`自检 ${ok}/${out.length} PASS\n`+out.map(t=>`${t.pass?'PASS':'FAIL'}  ${t.name}${t.error?'  '+t.error:''}`).join('\n');});
+    $('export').addEventListener('click',()=>{if(!report)return;const doc={generatedAt:new Date().toISOString(),...report,krisPlusGuard:{input:guardInput(),result:checkKrisGuard(guardInput())},atomeGuard:{input:atomeInput(),result:checkAtomeGuard(atomeInput())}};const blob=new Blob([JSON.stringify(doc,null,2)],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`sg_miles_audit_${report.input.date}_${report.input.mcc}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+    render(getInput());renderKrisGuard();renderAtomeGuard();
+  });
+  </script>
+</body>
+</html>
